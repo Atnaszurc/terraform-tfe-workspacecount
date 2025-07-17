@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.63.0"
+      version = "~>0.67.0"
     }
   }
 }
@@ -17,6 +17,7 @@ locals {
     name              = w.name
     project_id        = w.project_id
     terraform_version = w.terraform_version
+    resources         = w.resource_count
     }
   }
   workspace_info = [
@@ -24,6 +25,7 @@ locals {
       project_name      = [for p in local.projects : p.name if p.id == w.project_id][0]
       workspace_name    = w.name
       terraform_version = w.terraform_version
+      resources         = w.resources
     }
   ]
 }
